@@ -377,6 +377,16 @@ bool BranchOutputFilter::ensureInfrastructure(obs_data_t *settings)
         // Abort when no video situation
         obs_log(LOG_ERROR, "%s: No video", qUtf8Printable(name));
         return false;
+    // Branch Outputs eigener zusätzlicher Video-Mix bekommt keine automatische
+    // Formatanpassung wie der OBS-Hauptausgang. 10-Bit-Formate (P010 u.ä.)
+    // führen dabei zu stillem Fehlschlagen der Encoder-Bindung -- deshalb hier
+    // erzwungen auf ein breit unterstütztes 8-Bit-Format.
+    if (ovi.output_format == VIDEO_FORMAT_P010) {
+        obs_log(LOG_WARNING,
+            "%s: Canvas format is P010 (10-bit); forcing NV12 for this "
+            "filter's own recording/streaming output", qUtf8Printable(name));
+        ovi.output_format = VIDEO_FORMAT_NV12;
+        }
     }
 
     // Determine video source type first to choose correct resolution source
