@@ -377,6 +377,8 @@ bool BranchOutputFilter::ensureInfrastructure(obs_data_t *settings)
         // Abort when no video situation
         obs_log(LOG_ERROR, "%s: No video", qUtf8Printable(name));
         return false;
+    }
+    
     // Branch Outputs eigener zusätzlicher Video-Mix bekommt keine automatische
     // Formatanpassung wie der OBS-Hauptausgang. 10-Bit-Formate (P010 u.ä.)
     // führen dabei zu stillem Fehlschlagen der Encoder-Bindung -- deshalb hier
