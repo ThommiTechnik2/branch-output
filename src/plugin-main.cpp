@@ -378,7 +378,7 @@ bool BranchOutputFilter::ensureInfrastructure(obs_data_t *settings)
         obs_log(LOG_ERROR, "%s: No video", qUtf8Printable(name));
         return false;
     }
-    
+
     // Branch Outputs eigener zusätzlicher Video-Mix bekommt keine automatische
     // Formatanpassung wie der OBS-Hauptausgang. 10-Bit-Formate (P010 u.ä.)
     // führen dabei zu stillem Fehlschlagen der Encoder-Bindung -- deshalb hier
@@ -389,7 +389,6 @@ bool BranchOutputFilter::ensureInfrastructure(obs_data_t *settings)
             "filter's own recording/streaming output", qUtf8Printable(name));
         ovi.output_format = VIDEO_FORMAT_NV12;
         }
-    }
 
     // Determine video source type first to choose correct resolution source
     auto videoSourceType = obs_data_get_string(settings, "video_source_type");
